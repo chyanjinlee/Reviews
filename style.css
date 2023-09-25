@@ -3,6 +3,9 @@ main {
     display: grid;
     place-items: center;
   }
+  body {
+    background-color: rgb(73, 77, 70);
+  }
 
 .title {
     text-align: center;
@@ -23,7 +26,7 @@ main {
 }
 
 .review {
-    background: #ffd;
+    background: rgb(70, 68, 76);
     padding: 1.5rem 2rem;
     text-align: center;
 }
@@ -44,4 +47,32 @@ main {
     object-fit: cover;
     border-radius: 50%;
     position: relative;
+}
+i{
+    font-size:70px;
+}
+.fa-right-to-bracket {
+    color: pink;
+}
+
+.fa-envelope {
+color: rgb(107, 107, 255);
+position: inherit; 
+}
+
+.fa-envelope {
+    position: relative; 
+    left: 30px; 
+    color: rgb(107, 107, 255); 
+}
+
+.fa-instagram {
+    color: purple;
+    position:relative;
+    left: 60px;
+}
+.fa-cart-shopping{
+    color: rgb(87, 231, 234);
+    position:relative;
+    left: 90px;
 }

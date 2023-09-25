@@ -1,18 +1,25 @@
 const reviews = [
     // make your own content here
     {
-        name: "sock puppet 1",
-        img: "item-1.jpg",
-        description: "this is one sock puppet",
-        stars: 2,
-        reviewText: "it's pretty good i guess"
+        name: "Pikachu iPhone Case",
+        img: "1st item.jpg",
+        description: "Only for the iPhone Pro 11, this case will be the best choice.",
+        stars: 4,
+        reviewText: "Protect your iPhone from scratches, drops, and dust."
     },
     {
-        name: "sock puppet 2",
-        img: "item-2.jpg",
-        description: "this is another sock puppet",
-        stars: 3,
-        reviewText: "it's better than the other one"
+        name: "Detective Pikachu iPhone Case",
+        img: "3rdphoto.jpg",
+        description: "If you want something cute, get this.",
+        stars: 5,
+        reviewText: "Our Pikachu iPhone Case is made from premium materials to ensure durability and longevity."
+    },
+    {
+        name: "Grip Tok",
+        img: "3 time.jpg",
+        description: "If you want something cute, get this.",
+        stars: 5,
+        reviewText: "This item helps you to grip your phone more comfortably."
     }
 ];
 
@@ -23,41 +30,21 @@ const stars = document.getElementById('stars');
 const reviewText = document.getElementById('reviewText');
 
 const prevBtn = document.querySelector('.prev-btn');
-// make two more query selectors here for next button and random button
+const nextBtn = document.querySelector('.next-btn');
+const randomBtn = document.querySelector('.random-btn');
 
 // set initial item number
 let currItem = 0;
+// ...
 
-// load initial item
-window.addEventListener('DOMContentLoaded', () => {
-    // get object from array
-    const item = reviews[currItem];
-    // replace the src property of the DOM element with an id of 'img'
-    img.src = item.img;
-    // replace the text of the 'name', 'description' and 
-    // 'review_text' id elements
-    name.textContent = item.name;
-    description.textContent = item.description;
-    reviewText.textContent = item.reviewText;
-    // clear contents of 'stars' id element
-    while (stars.firstChild) {
-        stars.removeChild(stars.firstChild);
-    }
-    // this loops over the number of stars in item.stars
-    // and pushes new span elements with star icons
-    // into the stars DOM element
-    const fragment = new DocumentFragment();
-    for (let j = 0; j < item.stars; j++) {
-        const i = document.createElement("span");
-        i.textContent = "star_rate";
-        i.className = "material-icons";
-        fragment.append(i);
-    }
-    stars.append(fragment);
-});
-
-// show item based on currItem
+// Function to show an item based on its index
 function showItem(itemNum) {
+    if (itemNum < 0) {
+        itemNum = reviews.length - 1;
+    } else if (itemNum >= reviews.length) {
+        itemNum = 0;
+    }
+
     const item = reviews[itemNum];
     img.src = item.img;
     name.textContent = item.name;
@@ -68,23 +55,39 @@ function showItem(itemNum) {
     const fragment = new DocumentFragment();
     for (let j = 0; j < item.stars; j++) {
         const i = document.createElement("span");
-        i.textContent = "star_rate";
+        i.textContent = "star";
         i.className = "material-icons";
         fragment.append(i);
     }
     stars.append(fragment);
 
     reviewText.textContent = item.reviewText;
+
+    currItem = itemNum;
 }
-// show next item
-nextBtn.addEventListener('click', () => {
-    currItem++;
-    if (currItem > reviews.length - 1) {
-        currItem = 0;
-    }
+
+// Load initial item on page load
+window.addEventListener('DOMContentLoaded', () => {
     showItem(currItem);
 });
 
-// write code here for show previous item
+// Event listener for the "Next" button
+nextBtn.addEventListener('click', () => {
+    currItem++;
+    showItem(currItem);
+});
 
-// write code here to show random item
+// Event listener for the "Previous" button
+prevBtn.addEventListener('click', () => {
+    currItem--;
+    showItem(currItem);
+});
+
+// Event listener for the "Surprise Me" button
+randomBtn.addEventListener('click', () => {
+    const randomItemNum = Math.floor(Math.random() * reviews.length);
+    showItem(randomItemNum);
+
+    // Update the "Current Item" text
+    document.getElementById('item-value').textContent = randomItemNum + 1; // Adding 1 to start from 1, not 0.
+});
